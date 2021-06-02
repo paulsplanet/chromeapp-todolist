@@ -8,7 +8,10 @@ const USER_LS = "currentUser",
 function paintGreeting(text) {
     form.classList.remove(SHOWING_CN);
     greeting.classList.add(SHOWING_CN);
-    greeting.innerHTML = `Hello ${text}`;
+    let newText = text.charAt(0).toUpperCase() + text.slice(1);
+    const date = new Date();
+    const hr = date.getHours();
+    greeting.innerHTML = `${hr > 17 ? "Good Evening" : hr > 10 ? "Good Afternoon" : "Good Morning"}, ${newText}`;
 }
 
 function saveName(text) {

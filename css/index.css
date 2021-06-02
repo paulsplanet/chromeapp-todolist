@@ -1,3 +1,7 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 body {
     color: white;
     background-color: #1F618D;
@@ -26,4 +30,43 @@ body {
     z-index: -5;
     opacity: 0.7;
     animation: fadeIn 0.5s ease-in-out;
+}
+#momentum {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.clockDiv {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.clockDiv h1 {
+    font-size: 96px;
+}
+.clockDiv h4 {
+    font-size: 32px;
+    margin-top: 40px;
+}
+.js-form input {
+    font-size: 26px;
+    margin-top: 40px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #DBDFE1;
+    color: #DBDFE1;
+}
+.clockDiv input::placeholder {
+    color: #DBDFE1;
+}
+.js-form input:focus {
+    outline: none;
+}
+.js-clock h1,
+.js-clock span {
+    display: inline-block;
 }

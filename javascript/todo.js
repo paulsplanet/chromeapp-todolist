@@ -6,6 +6,9 @@ const TODOS_LS = "toDos";
 
 let toDos = [];
 
+function checkToDo(event) {
+
+}
 
 function deleteToDo(event) {
     const btn = event.target;
@@ -35,13 +38,17 @@ function loadToDos() {
 function paintToDo(text) {
     const li = document.createElement("li");
     const delBtn = document.createElement("button");
+    const chkBtn = document.createElement("button");
     const span = document.createElement("span");
     const newId = toDos.length + 1;
     delBtn.innerHTML = "❌"; 
     delBtn.addEventListener("click", deleteToDo);
+    chkBtn.addEventListener("click", checkToDo);
+    chkBtn.innerHTML = "✔"; 
     span.innerText = text;
     li.appendChild(span);
     li.appendChild(delBtn);
+    li.appendChild(chkBtn);
     li.id = newId;
     toDoList.appendChild(li);
     const toDoObj = {
