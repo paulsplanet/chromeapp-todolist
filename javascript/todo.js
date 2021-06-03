@@ -10,10 +10,25 @@ let toDos = [];
 let checkDos = [];
 
 function checkToDo(event) {
+    // transfer from todo to checkedToDo
     const content = event.target.parentNode.textContent;
-    const checkedDo = content.slice(0, content.length -2)
-    checkDos.push(checkedDo);
-    console.log(checkDos);
+    const checkedDo = content.slice(0, content.length -2);
+    const newId = checkDos.length + 1;
+    const checkDoObj = {
+        text: checkedDo,
+        id: newId,
+    };
+    checkDos.push(checkDoObj);
+    saveCheckedDos();
+    // delete from todo localStorage
+    const btn = event.target;
+    const li = btn.parentNode;
+    toDoList.removeChild(li);
+    const cleanToDos = toDos.filter(function(toDo) {
+        return toDo.id !== parseInt(li.id);
+    });
+    toDos = cleanToDos;
+    saveToDos();
 }
 
 function deleteToDo(event) {
@@ -50,7 +65,7 @@ function loadCheckedDos() {
     if(loadedCheckedDos !== null) {
         const parsedCheckDos = JSON.parse(loadedCheckedDos);
         parsedCheckDos.forEach(function(checkDo) {
-            paintCheckedDo(checkDo.text);
+            paintCheckedDo(checkDo.text, checkDo.id);
         });
     }
 }
@@ -79,8 +94,17 @@ function paintToDo(text) {
     saveToDos();
 }
 
-function paintCheckedDo(text) {
-
+function paintCheckedDo(text, id) {
+    const li = document.createElement("li");
+    const delBtn = document.createElement("button");
+    const span = document.createElement("span");  
+    delBtn.innerHTML = "❌"; 
+    delBtn.addEventListener("click", deleteToDo);
+    span.innerText = text;
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    li.id = id;
+    checkedList.appendChild(li);
 }
 
 function handleSubmit(event) {

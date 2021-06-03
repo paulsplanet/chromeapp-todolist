@@ -70,3 +70,10 @@ body {
 .js-clock span {
     display: inline-block;
 }
+.js-toDoList,
+.js-checkedList {
+    width: 25vw;
+    height: 30vh;
+    background-color: turquoise;
+    margin: 20px 0px;
+}
