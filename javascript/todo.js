@@ -1,13 +1,19 @@
 const toDoForm = document.querySelector(".js-toDoForm"),
     toDoInput = toDoForm.querySelector("input"),
-    toDoList = document.querySelector(".js-toDoList");
+    toDoList = document.querySelector(".js-toDoList"),
+    checkedList = document.querySelector(".js-checkedList");
 
 const TODOS_LS = "toDos";
+const CHEKCKDOS_LS = "checkedList";
 
 let toDos = [];
+let checkDos = [];
 
 function checkToDo(event) {
-
+    const content = event.target.parentNode.textContent;
+    const checkedDo = content.slice(0, content.length -2)
+    checkDos.push(checkedDo);
+    console.log(checkDos);
 }
 
 function deleteToDo(event) {
@@ -25,12 +31,26 @@ function saveToDos() {
     localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
 }
 
+function saveCheckedDos() {
+    localStorage.setItem(CHEKCKDOS_LS, JSON.stringify(checkDos));  
+}
+
 function loadToDos() {
     const loadedToDos = localStorage.getItem(TODOS_LS);
     if (loadedToDos !== null) {
         const parsedToDos = JSON.parse(loadedToDos);
         parsedToDos.forEach(function(toDo) {
             paintToDo(toDo.text);
+        });
+    }
+}
+
+function loadCheckedDos() {
+    const loadedCheckedDos = localStorage.getItem(CHEKCKDOS_LS);
+    if(loadedCheckedDos !== null) {
+        const parsedCheckDos = JSON.parse(loadedCheckedDos);
+        parsedCheckDos.forEach(function(checkDo) {
+            paintCheckedDo(checkDo.text);
         });
     }
 }
@@ -59,6 +79,10 @@ function paintToDo(text) {
     saveToDos();
 }
 
+function paintCheckedDo(text) {
+
+}
+
 function handleSubmit(event) {
     event.preventDefault();
     const currentValue = toDoInput.value;
@@ -68,6 +92,7 @@ function handleSubmit(event) {
 
 function init() {
     loadToDos();
+    loadCheckedDos();
     toDoForm.addEventListener("submit", handleSubmit)
 }
 
