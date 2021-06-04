@@ -18,7 +18,7 @@ function checkToDo(event) {
         text: checkedDo,
         id: newId,
     };
-    checkDos.push(checkDoObj);
+    paintCheckedDo(checkDoObj.text, checkDoObj.id);
     saveCheckedDos();
     // delete from todo localStorage
     const btn = event.target;
@@ -29,6 +29,7 @@ function checkToDo(event) {
     });
     toDos = cleanToDos;
     saveToDos();
+    console.log(checkDos);
 }
 
 function deleteToDo(event) {
@@ -40,6 +41,16 @@ function deleteToDo(event) {
     });
     toDos = cleanToDos;
     saveToDos();
+}
+
+function deleteCheckDo(event) {
+    const li = event.target.parentNode;
+    checkedList.removeChild(li);
+    const cleanCheckDos = checkDos.filter(function(checkDo) {
+        return checkDo.id !== parseInt(li.id);
+    });
+    checkDos = cleanCheckDos;
+    saveCheckedDos();
 }
 
 function saveToDos() {
@@ -82,8 +93,8 @@ function paintToDo(text) {
     chkBtn.innerHTML = "✔"; 
     span.innerText = text;
     li.appendChild(span);
-    li.appendChild(delBtn);
     li.appendChild(chkBtn);
+    li.appendChild(delBtn);
     li.id = newId;
     toDoList.appendChild(li);
     const toDoObj = {
@@ -99,12 +110,18 @@ function paintCheckedDo(text, id) {
     const delBtn = document.createElement("button");
     const span = document.createElement("span");  
     delBtn.innerHTML = "❌"; 
-    delBtn.addEventListener("click", deleteToDo);
+    delBtn.addEventListener("click", deleteCheckDo);
     span.innerText = text;
     li.appendChild(span);
     li.appendChild(delBtn);
     li.id = id;
     checkedList.appendChild(li);
+
+    const checkDoObj = {
+        text,
+        id,
+    };
+    checkDos.push(checkDoObj);
 }
 
 function handleSubmit(event) {

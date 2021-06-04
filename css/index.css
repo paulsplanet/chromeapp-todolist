@@ -37,6 +37,15 @@ body {
     display: flex;
     justify-content: center;
 }
+.weatherDiv,
+.toDoDiv {
+    width: 30vw;
+    height: 80vh;
+    margin-top: 100px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
 .clockDiv {
     width: 40vw;
     display: flex;
@@ -70,10 +79,53 @@ body {
 .js-clock span {
     display: inline-block;
 }
+
 .js-toDoList,
 .js-checkedList {
     width: 25vw;
     height: 30vh;
-    background-color: turquoise;
-    margin: 20px 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin: 20px;
+    list-style: none;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.js-toDoList li,
+.js-checkedList li {
+    padding: 5px 0 5px 20px;
+    color: #DBDFE1;
+    position: relative;
+}
+.js-toDoList li button,
+.js-checkedList li button {
+    background: none;
+    border: none;
+    width: 22px;
+    height: 22px;
+    color: tomato;
+}
+.js-toDoList li button:nth-child(2) {
+    color: #2ECC71;
+    font-weight: 600;
+}
+.js-toDoList li button:nth-child(3),
+.js-checkedList li button {
+    position: absolute;
+    right: 0;
+}
+.js-toDoForm input {
+    margin-left: 30px;
+    padding-bottom: 10px;
+    background: transparent;
+    border: none;
+    width: 15vw;
+    font-size: 18px;
+    border-bottom: 2px solid #DBDFE1;
+    color: #DBDFE1;
+}
+.js-toDoForm input::placeholder {
+    color: #DBDFE1;
+}
+.js-toDoForm input:focus {
+    outline: none;
 }
